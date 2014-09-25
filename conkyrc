@@ -1,4 +1,4 @@
 #!/bin/bash
 killall conky
-conky -c ~/.conky_datetime &
-conky -c ~/.conky_todo &
+conky -c ~/conky/.conky_datetime &
+conky -c ~/conky/.conky_todo &

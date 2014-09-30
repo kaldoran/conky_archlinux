@@ -1,4 +1,6 @@
 #!/bin/bash
-killall conky
-conky -c ~/conky/.conky_datetime &
-conky -c ~/conky/.conky_todo &
+conky -c ~/.conky/.conky_datetime &
+conky -c ~/.conky/.conky_todo &
+conky -c ~/.conky/.conky_right &
+conky -c ~/.conky/.conky_mpd &
+conky -c ~/.conky/.conky_workspace &

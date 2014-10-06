@@ -39,9 +39,8 @@ uppercase no
 
 default_color ffffff
 
-
 TEXT
-${font Raleway:weight=Light :size=98}${time %H:%M}${font}
+${goto 25}${font ITC Avant Garde Gothic Pro:size=98}${time %H}${color 259292}${font ITC Avant Garde Gothic Pro:size=80}${time %M}${color}${font}
 
 
 ${goto 45}${font Raleway:weight=Light:size=22} ${time %a %d %B}${font}

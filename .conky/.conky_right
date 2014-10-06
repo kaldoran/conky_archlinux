@@ -9,6 +9,7 @@ temperature_unit celsius
 double_buffer yes
 no_buffers yes
 text_buffer_size 2048
+short_units no
 
 gap_x 20
 gap_y 20
@@ -45,12 +46,8 @@ color3 888888
 color4 EF5A29
 color5 64FE2E
 color6 2F4F4F               # dark slate gray
-
-${color1} ${cpu cpu1 50,200 FFFF00 FF0000 s}
-
-
-
-
+color7 3666A3
+# ${font Raleway:size=12}${if_mounted /dev/sdb}${alignr 10}${execi 5 df -h | grep /dev/sdb1 | awk '{printf "%s / %s",$3,$2}'}${endif}
 TEXT
 
 Kernel : ${color5}${kernel}${color}
@@ -61,17 +58,20 @@ ${voffset -4}${goto 10}CPU3: ${color6}${cpubar cpu3}${color}${goto 175}${voffset
 ${goto 10}${voffset -8}CPU4: ${color6}${cpubar cpu4}${color}
 
 ${font Raleway:size=18}Disk${font Raleway:weight=Light:size=14} // ${uptime_short}
-${font Raleway:size=15}${color 006600} /${font Raleway:size=12}     ${color ffffff}${alignr 5}${fs_used /}/${fs_size /} 
-${font Raleway:size=15}${color CC9900} /${font Raleway:size=12}home ${color ffffff}${alignr 10}${fs_used /home}/${fs_size /home}
-${font Raleway:size=15}${color 6666CC} /${font Raleway:size=12}boot ${color ffffff}${alignr 10}${fs_used /boot}/${fs_size /boot}
-
+${if_mounted /boot}${goto 20}${voffset 2}${font econ :size=12}W${font}${offset 12}${voffset -4}${color2}Boot:${color} ${font Liberation Sans:style=Bold:size=8}${color7}${fs_used_perc /boot}%${color}${font}
+${goto 15}${fs_bar 4,25 /boot}${offset 8}${voffset -2}${color2}U:${color}${fs_used /boot} ${color2}T:${color}${fs_size /boot}
+${endif}${if_mounted /}${goto 20}${voffset 2}${font econ :size=12}W${font}${offset 12}${voffset -4}${color2}Root:${color} ${font Liberation Sans:style=Bold:size=8}${color7}${fs_used_perc /}%${color}${font}
+${goto 15}${fs_bar 4,25 /}${offset 8}${voffset -2}${color2}U:${color}${fs_used /} ${color2}T:${color}${fs_size /}
+${endif}${if_mounted /home}${goto 20}${voffset 2}${font econ :size=12}W${font}${offset 12}${voffset -4}${color2}Home:${color} ${font Liberation Sans:style=Bold:size=8}${color7}${fs_used_perc /home}%${color}${font}
+${goto 15}${fs_bar 4,25 /home}${offset 8}${voffset -2}${color2}U:${color}${fs_used /home} ${color2}T:${color}${fs_size /home}
+${endif}
 ${if_up wlp3s0}${font Raleway:size=18}Wi-Fi${font Raleway:weight=Light:size=14} // ${wireless_link_qual wlp3s0}%
 ${goto 10}${font econ :size=12}j
 ${font Raleway:size=12}${goto 28}${voffset -15} ${execi 3600 wget -O- http://ujm.eu5.org/ip.php} 
 ${goto 10}${font econ:size=12}D
-${font Raleway:size=12}${goto 28}${voffset -15} ${downspeed wlp3s0}${alignr 15}${downspeedgraph wlp3s0 15,100 000000 00ff00}
+${font Raleway:size=12}${goto 28}${voffset -15} ${downspeed wlp3s0}${alignr 5}${downspeedgraph wlp3s0 15,100 000000 00ff00}
 ${goto 10}${font econ:size=12}I
-${font Raleway:size=12}${goto 28}${voffset -15} ${upspeed wlp3s0}${alignr 15}${upspeedgraph wlp3s0 15,100 000000 ff0000}
+${font Raleway:size=12}${goto 28}${voffset -15} ${upspeed wlp3s0}${alignr 5}${upspeedgraph wlp3s0 15,100 000000 ff0000}
 ${else}${if_up eth0}${if_up wlp3s0}${font Raleway:size=20}Câble
 ${goto 10}${font econ :size=12}D
 ${font Raleway:size=12}${goto 28}${voffset -15} ${downspeed eth0}
